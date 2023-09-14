@@ -1,19 +1,18 @@
-import React, { Component } from "react";
-import $ from "jquery";
-import "./App.scss";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import About from "./components/About";
-import Experience from "./components/Experience";
-import Projects from "./components/Projects";
-import Skills from "./components/Skills";
+import React, { Component } from 'react';
+import $ from 'jquery';
+import './App.scss';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import About from './components/About';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
 
 class App extends Component {
-
   constructor(props) {
     super();
     this.state = {
-      foo: "bar",
+      foo: 'bar',
       resumeData: {},
       sharedData: {},
     };
@@ -34,26 +33,19 @@ class App extends Component {
       oppositeLangIconId === window.$primaryLanguageIconId
         ? window.$secondaryLanguageIconId
         : window.$primaryLanguageIconId;
-    document
-      .getElementById(oppositeLangIconId)
-      .removeAttribute("filter", "brightness(40%)");
-    document
-      .getElementById(pickedLangIconId)
-      .setAttribute("filter", "brightness(40%)");
+    // document.getElementById(oppositeLangIconId).removeAttribute('filter', 'brightness(40%)');
+    // document.getElementById(pickedLangIconId).setAttribute('filter', 'brightness(40%)');
   }
 
   componentDidMount() {
     this.loadSharedData();
-    this.applyPickedLanguage(
-      window.$primaryLanguage,
-      window.$secondaryLanguageIconId
-    );
+    this.applyPickedLanguage(window.$primaryLanguage, window.$secondaryLanguageIconId);
   }
 
   loadResumeFromPath(path) {
     $.ajax({
       url: path,
-      dataType: "json",
+      dataType: 'json',
       cache: false,
       success: function (data) {
         this.setState({ resumeData: data });
@@ -67,7 +59,7 @@ class App extends Component {
   loadSharedData() {
     $.ajax({
       url: `portfolio_shared_data.json`,
-      dataType: "json",
+      dataType: 'json',
       cache: false,
       success: function (data) {
         this.setState({ sharedData: data });
@@ -83,38 +75,28 @@ class App extends Component {
     return (
       <div>
         <Header sharedData={this.state.sharedData.basic_info} />
-        <div className="col-md-12 mx-auto text-center language">
+        <div className='col-md-12 mx-auto text-center language'>
           <div
             onClick={() =>
-              this.applyPickedLanguage(
-                window.$primaryLanguage,
-                window.$secondaryLanguageIconId
-              )
+              this.applyPickedLanguage(window.$primaryLanguage, window.$secondaryLanguageIconId)
             }
-            style={{ display: "inline" }}
-          >
-            <span
-              className="iconify language-icon mr-5"
-              data-icon="twemoji-flag-for-flag-united-kingdom"
-              data-inline="false"
-              id={window.$primaryLanguageIconId}
-            ></span>
+            style={{ display: 'inline' }}>
+            {/* <span
+              className='iconify language-icon mr-5'
+              data-icon='twemoji-flag-for-flag-united-kingdom'
+              data-inline='false'
+              id={window.$primaryLanguageIconId}></span> */}
           </div>
           <div
             onClick={() =>
-              this.applyPickedLanguage(
-                window.$secondaryLanguage,
-                window.$primaryLanguageIconId
-              )
+              this.applyPickedLanguage(window.$secondaryLanguage, window.$primaryLanguageIconId)
             }
-            style={{ display: "inline" }}
-          >
-            <span
-              className="iconify language-icon"
-              data-icon="twemoji-flag-for-flag-poland"
-              data-inline="false"
-              id={window.$secondaryLanguageIconId}
-            ></span>
+            style={{ display: 'inline' }}>
+            {/* <span
+              className='iconify language-icon'
+              data-icon='twemoji-flag-for-flag-poland'
+              data-inline='false'
+              id={window.$secondaryLanguageIconId}></span> */}
           </div>
         </div>
         <About
